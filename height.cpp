@@ -20,6 +20,6 @@ int nheight(num_expr* node) {
 	}
 }
 
-int bheight() {
-
+int bheight(bool_expr* b) {
+	
 }
