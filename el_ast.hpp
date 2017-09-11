@@ -1,5 +1,13 @@
 #pragma once
 
+struct num_expr;
+struct bool_expr;
+
+/* 
+	Primitive Syntactic Domains 
+	int_lit, bool_lit, arith_op, relational_op, logical_op
+*/
+
 enum arith_op {	
 	add_op,
 	sub_op,
@@ -31,33 +39,63 @@ enum bool_expr_kind {
 	relational_kind,
 	logical_kind
 };
+
 struct program {
+	program(int n, num_expr* b) : args(n), body(b) {}
 	int args;
 	num_expr* body;
 };
 
 struct num_expr {
+	num_expr(num_expr_kind k) : kind(k) {}
+
 	num_expr_kind kind;
 };
 
+struct int_lit : num_expr {
+	int_lit(int v) : num_expr(int_kind), int_val(v) {}
+
+	int int_val;
+};
+
+struct arg_expr : num_expr {
+	arg_expr(int a) : num_expr(arg_kind), arg(a) {}
+	
+	int arg;
+};
+
 struct arith_expr : num_expr {
-	arith_op op;
-	num_expr* lhs;
+  arith_expr(arith_op op, num_expr* l, num_expr* r) : num_expr(arith_kind), op(op), lhs(l), rhs(r) {}   
+	
+	arith_op op;   
+	num_expr* lhs;   
 	num_expr* rhs;
 
 };
 
 struct if_expr : num_expr {
+	if_expr(bool_expr* e1, num_expr* e2, num_expr* e3) : num_expr(if_kind), test(e1), pass(e2), fail(e3) {}
+	
 	bool_expr* test;
 	num_expr* pass;
 	num_expr* fail;
 };
 
 struct bool_expr {
+	bool_expr(bool_expr_kind k) : kind(k) {}
+	
 	bool_expr_kind kind;
 };
 
+struct bool_lit : bool_expr {
+	bool_lit(bool b) : bool_expr(bool_kind), bool_val(b) {}
+	
+	bool bool_val;
+};
+
 struct rel_expr : bool_expr {
+	rel_expr(relational_op op, num_expr* l, num_expr* r) : bool_expr(relational_kind), op(op), lhs(l), rhs(r) {}
+	
 	relational_op op;
 	num_expr* lhs;
 	num_expr* rhs;
@@ -65,21 +103,15 @@ struct rel_expr : bool_expr {
 };
 
 struct logical_expr : bool_expr {
+	logical_expr(logical_op op, bool_expr* l, bool_expr* r) : bool_expr(logical_kind), op(op), lhs(l), rhs(r) {}
+	
 	logical_op op;
 	bool_expr* lhs;
 	bool_expr* rhs;
 };
-struct arg_expr : num_expr {
-	int arg;
-};
 
-struct int_lit : num_expr {
-	int int_val;
-};
 
-struct bool_lit : bool_expr {
-	bool bool_val;
-};
+
 
 
 
