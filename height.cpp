@@ -30,3 +30,9 @@ int height(num_expr* e) {
 int height(bool_expr* b) {
   return 0;
 }
+int height_relational_expr(rel_expr* e){
+  return 1 + std::max(height(e->lhs), height(e->rhs));
+}
+int height_logical_expr(logical_expr* e) {
+  return 1 +std::max(height(e->lhs), height(e->rhs));
+}
