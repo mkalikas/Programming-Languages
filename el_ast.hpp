@@ -124,7 +124,9 @@ struct logical_expr : bool_expr {
 	bool_expr* rhs;
 };
 
-
+// Height Algorithms 
+int height(num_expr* e);
+int height(bool_expr* b);
 
 
 

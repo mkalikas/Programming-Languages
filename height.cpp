@@ -1,25 +1,32 @@
 #include "el_ast.hpp"
 #include <algorithm>
 
-int nheight(num_expr* node) {
-	if(!node)
-		return 0;
+int height_int_lit(int_lit* e){
+	return 0;
+}
+int height_arg_expr(arg_expr* e) {
+	return 0;
+}
+int height_arith_expr(arith_expr* e) {
+	return 1 + std::max(height(e->lhs), height(e->rhs));
+}
+int height_if_expr(if_expr* e) {
+	return 1 + std::max({height(e->test), height(e->pass), height(e->fail)});
+}
 
-	switch(node->kind){
-		case int_kind:
-			return 0;
+int height(num_expr* e) {
+	switch(e->kind){
+		case int_kind: 
+			return height_int_lit(static_cast<int_lit*>(e));
 		case arg_kind:
-			return 1;
+			return height_arg_expr(static_cast<arg_expr*>(e));
 		case arith_kind:
-			arith_expr* a;
-			return 1 + std::max(nheight(a->lhs), nheight(a->rhs));
+			return height_arith_expr(static_cast<arith_expr*>(e));
 		case if_kind:
-			if_expr* i;
-			return 1 + std::max(bheight(i->test), nheight(i->pass), nheight(i->fail));
-
+			return height_if_expr(static_cast<if_expr*>(e));	
 	}
 }
 
-int bheight(bool_expr* b) {
-	
+int height(bool_expr* b) {
+	return 0;
 }
