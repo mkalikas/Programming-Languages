@@ -7,6 +7,7 @@ int height_int_lit(int_lit* e){
 int height_arg_expr(arg_expr* e) {
   return 0;
 }
+
 int height_arith_expr(arith_expr* e) {
   return 1 + std::max(height(e->lhs), height(e->rhs));
 }
@@ -35,4 +36,8 @@ int height_relational_expr(rel_expr* e){
 }
 int height_logical_expr(logical_expr* e) {
   return 1 +std::max(height(e->lhs), height(e->rhs));
+}
+
+bool arg_check(program* p) {
+  return (p->args == height(p->body));
 }

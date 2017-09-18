@@ -128,6 +128,8 @@ struct logical_expr : bool_expr {
 int height(num_expr* e);
 int height(bool_expr* b);
 
+// Argument Check Function
+bool arg_check(program* p);
 
 
 
