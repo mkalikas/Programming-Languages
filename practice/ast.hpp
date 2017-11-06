@@ -1,6 +1,7 @@
 #pragma once
 
 #include "type.hpp"
+#include "eval.hpp"
 
 struct expr;
 
