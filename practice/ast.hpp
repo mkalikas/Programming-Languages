@@ -1,7 +1,8 @@
 #pragma once
 
+#include "type.hpp"
+
 struct expr;
-struct bool_;
 
 /* 
   Primitive Syntactic Domains 
@@ -156,7 +157,7 @@ struct cond_expr : expr
 
 struct value
 {
-  value(bool b) : kind(int_val) {}
+  value(value_kind k) : kind(k) {}
 
   value_kind kind;
 
