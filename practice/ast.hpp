@@ -161,14 +161,12 @@ struct value
 
 };
 
-value evaluate(const * e);
+value evaluate(const expr* e);
 
 // Height Algorithms 
 int height(expr* e);
-int height(bool_* b);
+int height(bool_expr* b);
 
-// Argument Check Function
-bool arg_check(program* p);
 
 
 
