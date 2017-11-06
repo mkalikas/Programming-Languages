@@ -53,7 +53,7 @@ value eval_cond_expr(const cond_expr* e) {
 
 }
 
-value eval_rel_expr(const rel_expr*e) {
+value eval_rel_expr(const rel_expr* e) {
   switch(e->op) {
     case lt_op:
     case gt_op:
