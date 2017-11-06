@@ -68,7 +68,7 @@ struct program
   expr* body;
 };
 
-// The base class of all essions
+// The base class of all expressions
 struct expr
 {
   expr(expr_kind k) : kind(k), t(nullptr) {}
@@ -77,7 +77,7 @@ struct expr
   type* t;
 };
 
-// Integer literal ession
+// Integer literal expression
 struct int_expr : epxr
 {
   int_expr(int v) : expr(ek_int), int_val(v) {}
@@ -113,7 +113,7 @@ struct if_expr : expr
   expr* fail;
 };
 
-// Boolean literal ession 
+// Boolean literal expression 
 struct bool_expr : expr 
 {
   bool_expr(bool b) : expr(ek_bool), bool_val(b) {}
