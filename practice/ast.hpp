@@ -9,7 +9,7 @@ struct bool_;
 */
 
 // Expressions 
-enum _kind : int {
+enum expr_kind : int {
   // Lambda Calculus
   ek_ref,
   ek_abs,
@@ -28,6 +28,7 @@ enum _kind : int {
   ek_and,
   ek_or,
   ek_not,
+
   // Relational
   ek_relational
 };
