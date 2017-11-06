@@ -4,11 +4,6 @@
 
 struct expr;
 
-/* 
-  Primitive Syntactic Domains 
-  int_lit, bool_lit, arith_op, relational_op, logical_op
-*/
-
 // Expressions 
 enum expr_kind : int {
   // Lambda Calculus
