@@ -1,3 +1,8 @@
 set(CMAKE_CXX_FLAGS "-std=c++14")
 
-add_executable(el main.cpp height.cpp)
+add_executable(lambda
+  main.cpp 
+  ast.cpp 
+  eval.cpp 
+  type.cpp 
+  )
