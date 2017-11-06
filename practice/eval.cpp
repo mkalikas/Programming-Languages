@@ -34,11 +34,11 @@ value eval(const expr* e) {
 value eval_arith_expr(const arith_expr* e) {
   switch(e->op) {
     case add_op:
-      return eval_num_expr(e->lhs) + eval_num_expr(e->rhs);
+      return eval(e->lhs) + eval(e->rhs);
     case sub_op:
-      return eval_num_expr(e->lhs) - eval_num_expr(e->rhs);
+      return eval(e->lhs) - eval(e->rhs);
     case mul_op:
-      return eval_num_expr(e->lhs) *eval_num_expr(e->rhs);
+      return eval(e->lhs) *eval(e->rhs);
   }
 }
 
