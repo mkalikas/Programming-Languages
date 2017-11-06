@@ -1,19 +1,16 @@
 #include "eval.hpp"
 
-int eval_program(program* p) {
-  return eval_num_expr(p->body);
-}
-int eval_int_expr(expr* e) {
+value eval(const expr* e) {
   switch(e->kind) {
     case ek_ref:
     case ek_abs:
     case ek_app:
     case ek_int: 
-      return e->int_val;
+      return value{e->int_val};
     case ek_arg:
-      return e->arg;
+      return value{e->arg};
     case ek_arith:
-      return eval_arith_expr(static_cast<arith_expr*>(e));
+      return eval_arith_expr(static_cast<const arith_expr*>(e));
     case ek_if: 
 
     case ek_not:
@@ -23,11 +20,18 @@ int eval_int_expr(expr* e) {
     case ek_app:
 
     case ek_relational:
-  }
+  case ek_logical:
+    return eval_logical_expr(static_cast<const logical_expr*>(e));
+  case ek_bool: 
+    return value{e->bool_val};
+  case ek_cond:
+    return eval_cond_expr(static_cast<const cond_expr*>(e));
+  case ek_relational:
+    return eval_rel_expr(static_cast<const rel_expr*>(e));
 
 }
 
-int eval_arith_expr(arith_expr* e) {
+value eval_arith_expr(const arith_expr* e) {
   switch(e->op) {
     case add_op:
       return eval_num_expr(e->lhs) + eval_num_expr(e->rhs);
@@ -37,28 +41,19 @@ int eval_arith_expr(arith_expr* e) {
       return eval_num_expr(e->lhs) *eval_num_expr(e->rhs);
   }
 }
-bool eval_bool_expr(bool_expr* e) {
-  case ek_logical:
-    return eval_logical_expr(static_cast<log ical_expr*>(e));
-  case ek_bool: 
-    return e->bool_val;
-  case ek_cond:
-    return eval_cond_expr(static_cast<cond_expr*>(e));
-  case ek_relational:
-    return eval_rel_expr(static_cast<rel_expr*>(e));
 
-}
-bool eval_logical_expr(logical_expr* e) {
+value eval_logical_expr(const logical_expr* e) {
   switch(e->op) {
     case and_op:
 
     case or_op:
   }
 }
-bool eval_cond_expr(cond_expr* e) {
+value eval_cond_expr(const cond_expr* e) {
 
 }
-bool eval_rel_expr(rel_expr*e) {
+
+value eval_rel_expr(const rel_expr*e) {
   switch(e->op) {
     case lt_op:
     case gt_op:

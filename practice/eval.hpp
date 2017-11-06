@@ -2,11 +2,9 @@
 #include "ast.hpp"
 
 // Valuation functions for expressions
-int eval_program(program* p);
-int eval_int_expr(expr* e);;
-int eval_arith_expr(arith_expr* e);
-bool eval_bool_expr(bool_expr* e);
-bool eval_logical_expr(logical_expr* e);
-bool eval_cond_expr(cond_expr* e);
-bool eval_rel_expr(rel_expr*e);
+value eval(const expr* e);;
+value eval_arith_expr(const arith_expr* e);
+value eval_logical_expr(const logical_expr* e);
+value eval_cond_expr(const cond_expr* e);
+value eval_rel_expr(const rel_expr*e);
 

@@ -6,7 +6,8 @@
 struct expr;
 
 // Expressions 
-enum expr_kind : int {
+enum expr_kind : int 
+{
   // Lambda Calculus
   ek_ref,
   ek_abs,
@@ -31,7 +32,8 @@ enum expr_kind : int {
 };
 
 // Operators for Arithmetic Expressions 
-enum arith_op { 
+enum arith_op 
+{ 
   add_op,
   sub_op,
   mul_op,
@@ -40,13 +42,15 @@ enum arith_op {
 };
 
 // Operators for Logical Expressions 
-enum logical_op {
+enum logical_op 
+{
   and_op,
   or_op
 };
 
 // Operators for Relational Expressions 
-enum relational_op {
+enum relational_op 
+{
   lt_op,
   gt_op,
   eq_op
@@ -156,10 +160,7 @@ struct value
   value(value_kind k) : kind(k) {}
 
   value_kind kind;
-
 };
-
-value evaluate(const expr* e);
 
 // Height Algorithms 
 int height(expr* e);
