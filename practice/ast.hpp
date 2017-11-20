@@ -1,7 +1,7 @@
 #pragma once
 
+#include <vector>
 #include "type.hpp"
-#include "eval.hpp"
 
 struct expr;
 
@@ -20,15 +20,19 @@ enum expr_kind : int
   ek_arith,
 
   // Logical 
-  ek_logical
+  ek_logical,
   ek_bool,
   ek_cond,
-  ek_and,
-  ek_or,
   ek_not,
 
   // Relational
-  ek_relational
+  ek_relational,
+
+  // Tuple
+  ek_tuple,
+
+  // Record
+  ek_record
 };
 
 // Operators for Arithmetic Expressions 
@@ -78,10 +82,14 @@ struct expr
   type* t;
 };
 
+// Sequence of expressions 
+using expr_seq = std::vector<expr*>;
+
 // Integer literal expression
-struct int_expr : epxr
+struct int_expr : expr
 {
   int_expr(int v) : expr(ek_int), int_val(v) {}
+  int int_val;
 
 };
 
@@ -104,6 +112,16 @@ struct arith_expr : expr
 
 };
 
+
+
+// Boolean literal expression 
+struct bool_expr : expr 
+{
+  bool_expr(bool b) : expr(ek_bool), bool_val(b) {}
+  
+  bool bool_val;
+};
+
 // Conditional Expressions 
 struct if_expr : expr
 {
@@ -112,14 +130,6 @@ struct if_expr : expr
   bool_expr* test;
   expr* pass;
   expr* fail;
-};
-
-// Boolean literal expression 
-struct bool_expr : expr 
-{
-  bool_expr(bool b) : expr(ek_bool), bool_val(b) {}
-  
-  bool bool_val;
 };
 
 // Relational Expressions
@@ -151,8 +161,16 @@ struct cond_expr : expr
   {}
   
   expr* e1;
-  expr* e2
+  expr* e2;
   expr* e3;
+};
+
+// Tuple expression
+struct tuple_expr : expr
+{
+  tuple_expr(const expr_seq& e_seq) : expr(ek_tuple), e(e_seq) {}
+
+  expr_seq e;
 };
 
 struct value

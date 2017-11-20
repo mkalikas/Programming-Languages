@@ -4,7 +4,9 @@ enum type_kind
 {
   ty_int,
   ty_bool,
-  ty_arrow
+  ty_arrow,
+  ty_tuple,
+  ty_record
 };
 
 struct type
@@ -31,4 +33,14 @@ struct arrow_type : type
 
   type* args;
   type* ret;
+};
+
+struct tuple_type : type 
+{
+
+};
+
+struct record_type : type
+{
+  
 };
